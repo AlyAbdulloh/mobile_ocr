@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_ocr/login_page.dart';
+import 'package:mobile_ocr/pages/login_page.dart';
 import 'package:mobile_ocr/utils/navigatoin_menu.dart';
 
 void main() {

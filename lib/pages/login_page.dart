@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_ocr/home_page.dart';
+import 'package:mobile_ocr/pages/home_page.dart';
 import 'package:mobile_ocr/utils/navigatoin_menu.dart';
 
 class LoginPage extends StatefulWidget {
