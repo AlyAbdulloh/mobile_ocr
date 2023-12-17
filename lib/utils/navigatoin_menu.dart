@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mobile_ocr/home_page.dart';
+import 'package:mobile_ocr/pages/home_page.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -12,6 +12,7 @@ class NavigationMenu extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: Obx(
         () => NavigationBar(
+            backgroundColor: Color(0xFF5FBDFF),
             height: 80,
             elevation: 1,
             selectedIndex: controller.selectedIndex.value,
