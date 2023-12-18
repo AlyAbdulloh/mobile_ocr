@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile_ocr/pages/camera_page.dart';
 import 'package:mobile_ocr/pages/home_page.dart';
+import 'package:camera/camera.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
