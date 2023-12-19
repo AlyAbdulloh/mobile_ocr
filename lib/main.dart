@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_ocr/pages/editData_page.dart';
 import 'package:mobile_ocr/pages/home_page.dart';
 import 'package:mobile_ocr/pages/login_page.dart';
 import 'package:mobile_ocr/utils/navigatoin_menu.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: NavigationMenu(),
+      home: HomePage(),
     );
   }
 }
