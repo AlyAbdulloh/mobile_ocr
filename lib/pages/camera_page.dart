@@ -2,7 +2,12 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_ocr/pages/editData_page.dart';
 import 'package:mobile_ocr/pages/preview.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
 // import 'package:flutter_camera/preview_page.dart';
 
 class CameraPage extends StatefulWidget {
@@ -34,6 +39,22 @@ class _CameraPageState extends State<CameraPage> {
     }
   }
 
+  Future<dynamic> scanKtm(XFile picture) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://192.168.1.35:5000/extract_info'));
+
+    request.files.add(http.MultipartFile.fromBytes(
+        'file', File(picture.path).readAsBytesSync(),
+        filename: picture.path));
+
+    var res = await request.send();
+    var response = await http.Response.fromStream(res);
+
+    var tes = json.decode(response.body);
+    // print(tes['NIM']);
+    return tes;
+  }
+
   Future takePicture() async {
     if (!_cameraController.value.isInitialized) {
       return null;
@@ -44,13 +65,12 @@ class _CameraPageState extends State<CameraPage> {
     try {
       await _cameraController.setFlashMode(FlashMode.off);
       XFile picture = await _cameraController.takePicture();
+      var extractedData = await scanKtm(picture);
       // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PreviewPage(
-            picture: picture,
-          ),
+          builder: (context) => EditData(data: extractedData),
         ),
       );
     } on CameraException catch (e) {
