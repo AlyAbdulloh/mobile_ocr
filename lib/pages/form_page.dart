@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:mobile_ocr/models/item.dart';
 import 'package:mobile_ocr/pages/home_page.dart';
 import 'package:mobile_ocr/seeder/item_seeder.dart';
+import 'package:mobile_ocr/pages/login_page.dart';
+import 'package:mobile_ocr/utils/navigatoin_menu.dart';
 
-class EditData extends StatefulWidget {
+class FormData extends StatefulWidget {
   // const EditData({super.key});
   final dynamic data;
-  EditData({Key? key, required this.data}) : super(key: key);
+  FormData({Key? key, required this.data}) : super(key: key);
 
   @override
-  State<EditData> createState() => _EditDataState();
+  State<FormData> createState() => _EditDataState();
 }
 
-class _EditDataState extends State<EditData> {
+class _EditDataState extends State<FormData> {
   TextEditingController nimController = TextEditingController();
   TextEditingController namaController = TextEditingController();
   TextEditingController ttlController = TextEditingController();
@@ -86,21 +88,13 @@ class _EditDataState extends State<EditData> {
   Widget _buildButton(context, _itemSeeder) {
     return ElevatedButton(
         onPressed: () {
-          // if (nimController.text !== "" &&
-          //     passwordController.text == "12345") {
-          //   Navigator.push(context,
-          //       MaterialPageRoute(builder: (context) => NavigationMenu()));
-          // } else {
-          //   ScaffoldMessenger.of(context).showSnackBar(
-          //       const SnackBar(content: Text('Please fill input')));
-          // }
           _itemSeeder.addItem(Item(
               nim: nimController.text,
               nama: namaController.text,
               ttl: ttlController.text,
               prodi: prodiController.text));
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => NavigationMenu()));
         },
         style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),

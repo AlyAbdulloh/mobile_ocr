@@ -2,7 +2,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_ocr/pages/editData_page.dart';
+import 'package:mobile_ocr/pages/form_page.dart';
 import 'package:mobile_ocr/pages/preview.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -41,17 +41,19 @@ class _CameraPageState extends State<CameraPage> {
 
   Future<dynamic> scanKtm(XFile picture) async {
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.1.35:5000/extract_info'));
+        'POST', Uri.parse('http://192.168.43.226:5000/extract_info'));
 
     request.files.add(http.MultipartFile.fromBytes(
         'file', File(picture.path).readAsBytesSync(),
         filename: picture.path));
 
+    // send to API
     var res = await request.send();
+
+    // get data from API
     var response = await http.Response.fromStream(res);
 
     var tes = json.decode(response.body);
-    // print(tes['NIM']);
     return tes;
   }
 
@@ -70,7 +72,7 @@ class _CameraPageState extends State<CameraPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => EditData(data: extractedData),
+          builder: (context) => FormData(data: extractedData),
         ),
       );
     } on CameraException catch (e) {
